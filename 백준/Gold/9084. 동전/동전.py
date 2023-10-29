@@ -1,27 +1,24 @@
 import sys
+input = sys.stdin.readline
 
-def coin_combinations(coins, current_coin, target_amount, memo):
-    if target_amount == 0:
+def makePay(amount, coinIdx):
+    if amount ==0:
         return 1
-    if target_amount < 0 or current_coin <= 0:
+    if amount < 0 or coinIdx<=0:
         return 0
-    if (current_coin, target_amount) in memo:
-        return memo[(current_coin, target_amount)]
+    if memo[amount][coinIdx]!=-1:
+        return memo[amount][coinIdx]
+    use_coin = makePay(amount-coins[coinIdx],coinIdx)
+    not_use_coin = makePay(amount,coinIdx-1)
+    r= use_coin + not_use_coin
+    memo[amount][coinIdx] = r
+    return r
 
-    # 현재 동전을 사용하는 경우와 사용하지 않는 경우를 모두 고려
-    use_coin = coin_combinations(coins, current_coin, target_amount - coins[current_coin], memo)
-    dont_use_coin = coin_combinations(coins, current_coin - 1, target_amount, memo)
-    memo[(current_coin, target_amount)] = use_coin + dont_use_coin
-
-    return memo[(current_coin, target_amount)]
-
-T = int(sys.stdin.readline())
-
+T = int(input())
 for _ in range(T):
-    N = int(sys.stdin.readline())
-    coins = list(map(int, sys.stdin.readline().split()))
-    coins.insert(0, 0)
-    M = int(sys.stdin.readline())
+    N = int(input())
+    coins = [0] +[*map(int, input().split())]
+    M = int(input())
 
-    memo = {}
-    print(coin_combinations(coins, N, M, memo))
+    memo = [[-1]*(N+1) for _ in range(M+1)]
+    print(makePay(M, N))
