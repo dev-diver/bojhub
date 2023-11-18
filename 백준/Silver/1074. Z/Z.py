@@ -3,7 +3,7 @@ N,R,C = map(int, input().split())
 k=0
 def recur(a,b,c,d):
     global k
-    if(a==b): #
+    if(a==b):
         if(a==C and c==R):
             print(k)
             return
