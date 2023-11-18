@@ -1,23 +1,22 @@
 N,R,C = map(int, input().split())
 
 k=0
-def recur(a,b,c,d):
+def recur(a,c,n):
     global k
-    if(a==b):
+    if(n==0):
         if(a==C and c==R):
             print(k)
             return
         k+=1
         return
-    if(not (a<=C<=b and c<=R<=d)):
-        k+=(b-a+1)**2
+    rng = 2**n
+    half = rng//2
+    if(not (a<=C<a+rng and c<=R<c+rng)):
+        k+=rng*rng
         return
-    coHalf = (a+b)//2
-    roHalf = (c+d)//2
+    recur(a,c,n-1)
+    recur(a+half,c,n-1)
+    recur(a,c+half,n-1)
+    recur(a+half,c+half,n-1)
 
-    recur(a,coHalf,c,roHalf)
-    recur(coHalf+1,b,c,roHalf)
-    recur(a,coHalf,roHalf+1,d)
-    recur(coHalf+1,b,roHalf+1,d)
-
-recur(0,(2**N)-1,0,(2**N)-1)
+recur(0,0,N)
