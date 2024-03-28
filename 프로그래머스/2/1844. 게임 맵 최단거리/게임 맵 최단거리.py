@@ -4,7 +4,7 @@ def solution(maps):
     
     visited = copy.deepcopy(maps)
     que = deque([])
-    que.append((0,0,1))
+    que.append(((0,0),1))
     
     maxX = len(maps)-1
     maxY = len(maps[0])-1
@@ -13,13 +13,13 @@ def solution(maps):
     
     while que:
         
-        x, y, move = que.popleft()
+        (x, y), move = que.popleft()
         if(x==maxX and y==maxY):
             return move
         for mx,my in direction:
             nx,ny = x+mx, y+my
             if(0<= nx <= maxX and 0<= ny <= maxY and visited[nx][ny] != 0):
-                que.append((nx,ny,move+1))
+                que.append(((nx,ny),move+1))
                 visited[nx][ny] = 0
     
     return -1
