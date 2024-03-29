@@ -1,17 +1,10 @@
 import sys
 input = sys.stdin.readline
 N,M = input().split(' ')
-Ai = [*map(int,input().split(' '))]
-Bi = [*map(int,input().split(' '))]
-A = set()
-B = set()
-for a in Ai:
-  A.add(a)
-for b in Bi:
-  B.add(b)
-C = A-B
-sC = sorted(C)
+A = set([*map(int,input().split(' '))])
+B = set([*map(int,input().split(' '))])
+C = sorted(A-B)
 print(len(C))
 if(len(C)>0):
-  result = [*map(str, sC)]
+  result = [*map(str, C)]
   print(' '.join(result))
