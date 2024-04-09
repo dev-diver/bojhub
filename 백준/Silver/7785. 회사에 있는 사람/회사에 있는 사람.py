@@ -6,6 +6,4 @@ for _ in range(N):
     S.add(name)
   elif(state=="leave"):
     S.remove(name)
-A=sorted(S)
-A.reverse()
-print(*A, sep="\n")
+print(*sorted(S,reverse=True), sep="\n")
