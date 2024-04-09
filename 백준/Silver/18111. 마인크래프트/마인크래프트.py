@@ -1,6 +1,5 @@
 N,M,B=map(int,input().split())
 T = [[*map(int,input().split())] for _ in range(N)]
-Cost = dict()
 
 def calCost(H,T,B):
   dig=0
@@ -17,7 +16,10 @@ def calCost(H,T,B):
   else:
     return float('inf')
 
-for H in range(257):
+Cost = dict()
+minB = min([min(line) for line in T])
+maxB = max([max(line) for line in T])
+for H in range(minB,maxB+1):
   cost = calCost(H,T,B)
   Cost[H] = cost
 R = sorted(Cost, key=lambda x:(Cost[x],-x))[0]
