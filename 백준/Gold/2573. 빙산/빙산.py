@@ -26,11 +26,11 @@ def meltAll():
   I = copy.deepcopy(NI)
 
 def countIceberg():
-  V=copy.deepcopy(I)
+  V = copy.deepcopy(I)
   def bfs(coord):
     x,y = coord
     if(V[x][y]==0): return 0
-    Q=deque([(x,y)])
+    Q = deque([(x,y)])
     V[x][y]=0
     while Q:
       x,y = Q.popleft()
@@ -50,14 +50,8 @@ def countIceberg():
 
 year = 0
 iceberg = 0
-while True:
-  iceberg = countIceberg()
-  if(iceberg!=1):
-    break
+while ((iceberg:=countIceberg())==1):
   year+=1
   meltAll()
 
-if(iceberg==0):
-  print(0)
-else:
-  print(year)
+print(0 if iceberg==0 else year)
