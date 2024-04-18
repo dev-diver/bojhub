@@ -1,18 +1,21 @@
-from collections import deque
-N,L,W = map(int,input().split())
-A = deque([*map(int,input().split())])
+n, w, l = map(int, input().split())
+mylist = list(map(int, input().split()))
 
-t=0
-Q=deque([])
-totalWeight = 0
-while A:
-  t+=1
-  if(Q and t>=Q[0][1]+L):
-    pop_truck = Q.popleft()
-    totalWeight -= pop_truck[0]
-  next_truck = A[0]
-  if(totalWeight+next_truck<=W):
-    next_truck = A.popleft()
-    Q.append((next_truck,t))
-    totalWeight += next_truck
-print(t+L)
+bridge = [0]*w
+count = 0
+arrivecnt = 0
+weight = 0
+
+while bridge:
+  arrive = bridge.pop(0)
+  weight -= arrive
+
+  if len(mylist) != 0:
+    if weight + mylist[0] <= l:
+      weight += mylist[0]
+      bridge.append(mylist.pop(0))
+    else:
+      bridge.append(0)
+  count += 1
+
+print(count)
