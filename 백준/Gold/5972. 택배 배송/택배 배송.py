@@ -23,4 +23,4 @@ while Q:
     if(D[v] > distance):
       D[v] = distance
       heapq.heappush(Q,distance<<16|v)
-print(D[-1])
+sys.stdout.write(f"{D[-1]}")
