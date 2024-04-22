@@ -1,16 +1,18 @@
+import sys
+input = sys.stdin.readline
 T = int(input())
 correct={}
 wrong={}
+cnt=0
 for _ in range(T):
-  n,user,case,_,_,_,_ = input().strip().split()
-  if(user=='megalusion'):
+  _,user,case,_,_,_,_ = input().strip().split()
+  if(user=='megalusion' or user in correct):
     continue
   if(case=='4'):
-    correct[user] = wrong.get(user,0)
-  elif(user not in correct):
+    wr = wrong.get(user,0)
+    cnt += wr
+    correct[user] = wr
+  else:
     wrong[user] = wrong.get(user,0)+1
-wrongcnt = 0
-for i in correct:
-  wrongcnt+=correct[i]
-ans = len(correct)/(len(correct)+wrongcnt)*100 if len(correct)>0 else 0
+ans = len(correct)/(len(correct)+cnt)*100 if len(correct)>0 else 0
 print(ans)
