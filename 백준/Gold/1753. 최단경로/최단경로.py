@@ -1,5 +1,7 @@
 import sys
+from io import StringIO
 import heapq
+output = StringIO()
 input = sys.stdin.readline
 N,E = map(int,input().split())
 K = int(input())
@@ -26,6 +28,7 @@ while Q:
       heapq.heappush(Q,distance<<16|next_v)
 for x in D[1:]:
   if x!=sys.maxsize:
-    sys.stdout.write("%d\n"%x)
+    output.write(f"{x}\n")
   else:
-    sys.stdout.write("INF\n")
+    output.write("INF\n")
+sys.stdout.write(output.getvalue())
