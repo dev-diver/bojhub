@@ -37,5 +37,4 @@ for i in range(T):
   paths = dfs(N)
   paths.sort()
   print(*paths,sep="\n")
-  if(i!=T-1):
-    print()
+  print()
