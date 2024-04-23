@@ -1,3 +1,5 @@
+import sys,os,io
+input = io.BytesIO(os.read(0,os.fstat(0).st_size)).readline
 N,L = map(int,input().split())
 M = []
 for _ in range(N):
@@ -15,4 +17,4 @@ for s,e in M:
   if(E<e):
     cnt+=1
     E += L
-print(cnt)
+sys.stdout.write(str(cnt))
