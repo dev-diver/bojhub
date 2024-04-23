@@ -5,7 +5,7 @@ M = []
 for _ in range(N):
   s,e = map(int,input().split())
   M.append((s,e))
-M.sort()
+M.sort(key=lambda x:x[0])
 
 E = 0
 cnt = 0
