@@ -1,6 +1,6 @@
-import sys
+import sys,io,os
 import heapq
-input = sys.stdin.readline
+input = io.BytesIO(os.read(0,os.fstat(0).st_size)).readline
 M,N = map(int,input().split())
 G = [[*map(int,input().split())] for _ in range(M)]
 D = [[0]*N for _ in range(M)]
@@ -20,5 +20,4 @@ while Q:
         heapq.heappush(Q, (-h,nx,ny))
       elif(h>H):
         D[x][y]+=D[nx][ny]
-
-print(D[M-1][N-1])
+sys.stdout.write(str(D[M-1][N-1]))
