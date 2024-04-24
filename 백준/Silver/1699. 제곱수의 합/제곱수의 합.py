@@ -1,11 +1,20 @@
 N = int(input())
-S = [i*i for i in range(1,318)]
-dp = [0]*(N+1)
-dp[1]=1
-for i in range(2,N+1):
-  mn=i
+maxi = int(N**0.5)
+S = {i*i for i in range(1,maxi+1)}
+def div(N):
   for s in S:
-    if(i-s<0):break
-    mn = min(mn, 1 + dp[i-s])
-  dp[i]=mn
-print(dp[-1])
+    if((N-s) in S):
+      return True
+  return False
+
+if N in S:
+  print(1)
+elif div(N):
+  print(2)
+else:
+  while(N%4==0):
+    N//=4
+  if(N%8==7):
+    print(4)
+  else:
+    print(3)
