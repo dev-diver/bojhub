@@ -1,17 +1,13 @@
-import sys
-input = sys.stdin.readline
-*A, = input().strip()
-*B, = input().strip()
-A=[0]+A
-B=[0]+B
-
-memo=[[0]*(len(B)) for _ in range(len(A))]
+A = ' '+input().strip()
+B = ' '+input().strip()
+dp = [[0]*len(B) for _ in range(len(A))]
+for j in range(len(B)):
+    dp[0][j] = 0
 for i in range(1,len(A)):
+    dp[i][0] = max(dp[i-1][0],1 if A[i]==B[0] else 0)
     for j in range(1,len(B)):
-        r=0
-        if(A[i]==B[j]):
-            r=1+memo[i-1][j-1]
+        if A[i]==B[j]:
+            dp[i][j] = dp[i-1][j-1]+1
         else:
-            r=max(memo[i-1][j],memo[i][j-1])
-        memo[i][j]=r
-print(memo[len(A)-1][len(B)-1])
+            dp[i][j] = max(dp[i][j-1],dp[i-1][j])
+print(dp[-1][-1])
