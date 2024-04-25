@@ -1,10 +1,15 @@
-A=' '+input().strip()
-B=' '+input().strip()
-C=' '+input().strip()
-dp = [[[0]*len(C) for _ in range(len(B))] for _ in range(len(A))]
-for i in range(1,len(A)):
-    for j in range(1,len(B)):
-        for k in range(1,len(C)):
+import sys
+input = sys.stdin.readline
+A=' '+input().rstrip()
+B=' '+input().rstrip()
+C=' '+input().rstrip()
+lenA = len(A)
+lenB = len(B)
+lenC = len(C)
+dp = [[[0]*lenC for _ in range(lenB)] for _ in range(lenA)]
+for i in range(1,lenA):
+    for j in range(1,lenB):
+        for k in range(1,lenC):
             if(A[i]==B[j] and B[j]==C[k]):
                 dp[i][j][k] = dp[i-1][j-1][k-1]+1
             else:
