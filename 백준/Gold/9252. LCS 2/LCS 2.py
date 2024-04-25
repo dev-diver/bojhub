@@ -1,32 +1,20 @@
 import sys
-sys.setrecursionlimit(10000)
-S1= list(sys.stdin.readline().strip())
-S2= list(sys.stdin.readline().strip())
-same = [[0]*len(S2) for _ in range(len(S1))]
-mem  = [[-1]*len(S2) for _ in range(len(S1))]
-
-for i in range(len(S1)):
-  for j in range(len(S2)):
-    if(S1[i]==S2[j]): same[i][j] = 1
-
-def FindLCS(i,j):
-  
-  if(i>=len(S1) or j>=len(S2)): return 0
-  if(mem[i][j]!= -1): return mem[i][j]
-  
-  if(same[i][j]==1): result = FindLCS(i+1,j+1) + 1
-  else: result = max(FindLCS(i+1,j), FindLCS(i,j+1))
-  mem[i][j] = result
-  return result
-
-L=FindLCS(0,0)
-print(L)
-
-Str=""
-for i in range(len(S1)):
-  for j in range(len(S2)):
-    if(mem[i][j]==L and same[i][j]==1): 
-      Str+=S1[i]
-      L-=1
-      break;
-print(Str)
+input = sys.stdin.readline
+A = ' '+input().strip()
+B = ' '+input().strip()
+dps =[['']*len(B) for _ in range(len(A))]
+for i in range(1,len(A)):
+    for j in range(1,len(B)):
+        if A[i]==B[j]:
+            dps[i][j]=dps[i-1][j-1]+A[i]
+        else:
+            maxs = ''
+            if(len(dps[i-1][j]) > len(dps[i][j-1])):
+                maxs = dps[i-1][j]
+            else:
+                maxs = dps[i][j-1]
+            dps[i][j] = maxs
+l=len(dps[-1][-1])
+print(l)
+if(l>0):
+    print(dps[-1][-1])
