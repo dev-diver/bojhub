@@ -1,5 +1,6 @@
 def solution(citations):
-    arr = [0]*10001
+    maxi = max(citations)
+    arr = [0]*(maxi+1)
     for cite in citations:
         arr[cite]+=1
     for i in range(len(arr)-2,-1,-1):
