@@ -5,7 +5,7 @@ N = int(input())
 G = [input().rstrip().split() for _ in range(N)]
 
 T=[]
-A=[]
+A=set()
 directions = [(1,0),(-1,0),(0,-1),(0,1)]
 
 def isSuccess():
@@ -18,22 +18,42 @@ def isSuccess():
                 nx,ny = nx+dx,ny+dy
     return True
 
+def makeRoad():
+    global A
+    for x,y in T:
+        for dx,dy in directions:
+            nx,ny = x+dx,y+dy
+            temp = []
+            while(0<=nx<N and 0<=ny<N and G[nx][ny]!='T'):
+                if(G[nx][ny]=='S'):
+                    if(len(temp)==0):
+                        return False
+                    for t in temp:
+                        A.add(t)
+                    break
+                else:
+                    temp.append((nx,ny))
+                    nx,ny = nx+dx,ny+dy
+    return True
+
 for i in range(N):
     for j in range(N):
         if(G[i][j]=='T'):
             T.append((i,j))
-        elif(G[i][j]=='X'):
-            A.append((i,j))
 
-success = False
-for a,b,c in combinations(A,3):
-    G[a[0]][a[1]] = 'O'
-    G[b[0]][b[1]] = 'O'
-    G[c[0]][c[1]] = 'O'
-    success = isSuccess()
-    if(success):
-        break
-    G[a[0]][a[1]] = 'X'
-    G[b[0]][b[1]] = 'X'
-    G[c[0]][c[1]] = 'X'
-print('YES' if success else 'NO')
+canTry = makeRoad()
+if(canTry):
+    success = False
+    for a,b,c in combinations(A,3):
+        G[a[0]][a[1]] = 'O'
+        G[b[0]][b[1]] = 'O'
+        G[c[0]][c[1]] = 'O'
+        success = isSuccess()
+        if(success):
+            break
+        G[a[0]][a[1]] = 'X'
+        G[b[0]][b[1]] = 'X'
+        G[c[0]][c[1]] = 'X'
+    print('YES' if success or len(A)<3 else 'NO')
+else:
+    print('NO')
