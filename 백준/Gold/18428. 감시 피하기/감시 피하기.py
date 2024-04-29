@@ -44,16 +44,14 @@ for i in range(N):
 canTry = makeRoad()
 if(canTry):
     success = False
-    for a,b,c in combinations(A,3):
-        G[a[0]][a[1]] = 'O'
-        G[b[0]][b[1]] = 'O'
-        G[c[0]][c[1]] = 'O'
+    for comb in combinations(A,3):
+        for x,y in comb:
+            G[x][y] = 'O'
         success = isSuccess()
         if(success):
             break
-        G[a[0]][a[1]] = 'X'
-        G[b[0]][b[1]] = 'X'
-        G[c[0]][c[1]] = 'X'
+        for x,y in comb:
+            G[x][y] = 'X'
     print('YES' if success or len(A)<3 else 'NO')
 else:
     print('NO')
