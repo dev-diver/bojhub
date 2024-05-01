@@ -1,3 +1,5 @@
+import sys
+input = sys.stdin.readline
 N=int(input())
 S=input().rstrip()
 W=[]
@@ -13,10 +15,10 @@ def changeToDict(S):
 def isSim(S,W):
     s = changeToDict(S)
     w = changeToDict(W)
-    diff = 0
+
     for ch in w:
-        tmp = s.get(ch,0)-w[ch]
-        s[ch] = tmp
+        s[ch] = s.get(ch,0)-w[ch]
+    diff = 0
     total=0
     for ch in s:
         diff += abs(s[ch])
