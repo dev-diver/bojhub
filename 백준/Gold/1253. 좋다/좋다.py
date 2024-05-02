@@ -1,3 +1,5 @@
+import sys
+input = sys.stdin.readline
 N=int(input())
 *S,=map(int,input().split())
 S.sort()
