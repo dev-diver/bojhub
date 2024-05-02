@@ -3,16 +3,21 @@ N=int(input())
 S.sort()
 result=0
 for i in range(N):
-  temp = S[:i]+S[i+1:]
-  start,end = 0,len(temp)-1
-  while(start<end):
-    total = temp[start]+temp[end]
-    if(S[i]==total):
-      result+=1
-      break
-    elif(S[i]<total):
-      end-=1
+  target = S[i]
+  left,right = 0,N-1
+  while(left<right):
+    total = S[left]+S[right]
+    if(target==S[left]+S[right]):
+      if(left==i):
+        left+=1
+      elif(right==i):
+        right-=1
+      else:
+        result+=1
+        break
+    elif(target<total):
+      right-=1
     else:
-      start+=1
-      
+      left+=1
+
 print(result)
