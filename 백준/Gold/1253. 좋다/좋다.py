@@ -3,21 +3,16 @@ N=int(input())
 S.sort()
 result=0
 for i in range(N):
-  for j in range(N):
-    if(j==i): continue
-    lo = j+1
-    hi = N
-    while(lo<hi):
-      mid = (lo+hi)//2
-      if(S[i]>S[j]+S[mid]): #True
-        lo = mid +1
-      else:
-        hi = mid
-    k = lo
-    while(k==i or k==j):
-      k+=1
-    if(k<N and S[i]==S[j]+S[k]):
-      result += 1
+  temp = S[:i]+S[i+1:]
+  start,end = 0,len(temp)-1
+  while(start<end):
+    total = temp[start]+temp[end]
+    if(S[i]==total):
+      result+=1
       break
-
+    elif(S[i]<total):
+      end-=1
+    else:
+      start+=1
+      
 print(result)
