@@ -14,11 +14,11 @@ def maxStarsOnLine(i):
 
   yStars.sort()
   mx = 0
-  l = 0
+  l = -1
   for yIndex in range(len(yStars)):
     y = yStars[yIndex]
-    # if(y==l): continue
-    # if(l!=0 and l+L>=yStars[-1]) : break
+    if(y==l): continue
+    if(l!=-1 and l+L>=yStars[-1]) : break
     l=y
     k = yIndex
     s = 0
@@ -28,13 +28,13 @@ def maxStarsOnLine(i):
     mx = max(mx,s)
   return mx
 
-l = 0
+l = -1
 mx = 0
 for i in range(K):
   s = S[i]
   x,y = s
-  # if(x==l): continue
-  # if(l!=0 and l+L>=S[-1][0]): break
+  if(x==l): continue
+  if(l!=-1 and l+L>=S[-1][0]): break
   l=x
   mx = max(mx, maxStarsOnLine(i))
 print(K-mx)
