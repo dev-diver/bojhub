@@ -1,4 +1,6 @@
 #스위핑
+import sys
+input = sys.stdin.readline
 N,M,L,K=map(int,input().split())
 S = [tuple(map(int,input().split())) for _ in range(K)]
 S.sort(key=lambda x:x[0])
