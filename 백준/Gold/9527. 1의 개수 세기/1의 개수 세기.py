@@ -6,7 +6,8 @@ def sumOne(N):
     a = 1<<n
     m = (N+1)//a
     r = (N+1)%a
-    result = m*(a>>1) + max(0,r-(a>>1))
+    b = a>>1
+    result = m*b + max(0,r-b)
     s+=result
   return s
 print(sumOne(M)-sumOne(N-1))
