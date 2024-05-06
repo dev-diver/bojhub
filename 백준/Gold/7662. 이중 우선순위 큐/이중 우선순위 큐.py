@@ -1,41 +1,39 @@
 import sys
 import heapq
+from collections import defaultdict
 input = sys.stdin.readline
 T = int(input())
-ans=[]
 for _ in range(T):
-  k = int(input())
+  N = int(input())
   lQ = []
   hQ = []
-  deleted = [False]*k
-  for i in range(k):
-    cmd, num = input().strip().split()
-    num = int(num)
-    if(cmd == "I"):
-      heapq.heappush(lQ, (num, i)) #최소힙
-      heapq.heappush(hQ, (-num,i)) #최대힙
-    if(cmd == "D"):
-      if(num == 1):
-        while hQ and deleted[hQ[0][1]]:
-          heapq.heappop(hQ)
-        if hQ:
-          n, i = heapq.heappop(hQ)
-          deleted[i] = True
-      elif(num == -1):
-        while lQ and deleted[lQ[0][1]]:
-          heapq.heappop(lQ)
-        if lQ:
-          n, i = heapq.heappop(lQ)
-          deleted[i] = True
-  while lQ and deleted[lQ[0][1]]:
+  counter = defaultdict(int)
+  for _ in range(N):
+    cmd,n = input().split()
+    n=int(n)
+    if(cmd=="I"):
+      heapq.heappush(lQ,n)
+      heapq.heappush(hQ,-n)
+      counter[n]+=1
+    if(cmd=="D"):
+      if(n==1):
+        while hQ:
+          elem = -heapq.heappop(hQ)
+          if(counter[elem]>0):
+            counter[elem]-=1
+            break
+      else:
+        while lQ:
+          elem = heapq.heappop(lQ)
+          if(counter[elem]>0):
+            counter[elem]-=1
+            break
+
+  while(lQ and counter[lQ[0]]==0):
     heapq.heappop(lQ)
-  while hQ and deleted[hQ[0][1]]:
+  while(hQ and counter[-hQ[0]]==0):
     heapq.heappop(hQ)
-  if(not lQ):
-    ans.append("EMPTY")
+  if(hQ):
+    print(-hQ[0] , lQ[0])
   else:
-    h = -hQ[0][0]
-    l = lQ[0][0]
-    ans.append(str(h) + " " + str(l))
-  # print(lQ, hQ, deleted)
-print(*ans,sep="\n")
+    print("EMPTY")
