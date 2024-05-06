@@ -1,7 +1,7 @@
-import sys
+import sys, os, io
 import heapq
 from collections import defaultdict
-input = sys.stdin.readline
+input = io.BytesIO(os.read(0,os.fstat(0).st_size)).readline
 T = int(input())
 for _ in range(T):
   N = int(input())
@@ -11,11 +11,11 @@ for _ in range(T):
   for _ in range(N):
     cmd,n = input().split()
     n=int(n)
-    if(cmd=="I"):
+    if(cmd==b'I'):
       heapq.heappush(lQ,n)
       heapq.heappush(hQ,-n)
       counter[n]+=1
-    if(cmd=="D"):
+    if(cmd==b'D'):
       if(n==1):
         while hQ:
           elem = -heapq.heappop(hQ)
