@@ -1,24 +1,18 @@
 def solution(k, dungeons):
-    def makePerm(make,last):
-        if(len(last)==0):
-            perms.append(make)
-            return
-        else:
-            for i in range(len(last)):
-                makePerm(make+[last[i]],last[:i]+last[i+1:])
     
-    perms = []
-    makePerm([],dungeons)
+    visit=[False]*len(dungeons)
+    def dfs(k,cnt,dungeons):
+        if(cnt>=len(dungeons)):
+            return cnt
+        result = cnt
+        for i in range(len(dungeons)):
+            need, cost = dungeons[i]
+            if(visit[i]==False and k>=need):
+                visit[i] = True
+                result = max(result, dfs(k-cost,cnt+1,dungeons))
+                visit[i] = False
+        return result
+
+    mx = dfs(k,0,dungeons)
     
-    mx = 0
-    for perm in perms:
-        hp = k
-        visit = 0
-        for need,cost in perm:
-            if(hp >= need):
-                visit+=1
-                hp-=cost
-            else:
-                break
-        mx = max(mx,visit)
     return mx
