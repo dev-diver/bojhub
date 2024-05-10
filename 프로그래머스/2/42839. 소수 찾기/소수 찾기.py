@@ -6,7 +6,6 @@ def solution(numbers):
             Num|={int(pick)}
         for i in range(len(unpick)):
             comb(Num,pick+unpick[i], unpick[:i]+unpick[i+1:])
-    
     comb(Num,'',numbers)
     Num-={0,1}
     for i in range(2,int(max(Num)**0.5)+1):
