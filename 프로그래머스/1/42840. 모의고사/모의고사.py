@@ -1,33 +1,15 @@
 def one(i):
     return i%5+1
 
+pattern2=[2,1,2,3,2,4,2,5,2]
 def two(i):
-    if(i%2==0):
-        return 2
-    else:
-        i=i%8
-        if(i==1):
-            return 1
-        elif(i==3):
-            return 3
-        elif(i==5):
-            return 4
-        elif(i==7):
-            return 5
+    i=i%8
+    return pattern2[i]
 
+pattern3=[3,3,1,1,2,2,4,4,5,5]
 def three(i):
     i=i%10
-    i=i//2
-    if(i==0):
-    	return 3
-    elif(i==1):
-    	return 1
-    elif(i==2):
-    	return 2
-    elif(i==3):
-    	return 4
-    elif(i==4):
-        return 5
+    return pattern3[i]
     
 def solution(answers):
     answer = []
