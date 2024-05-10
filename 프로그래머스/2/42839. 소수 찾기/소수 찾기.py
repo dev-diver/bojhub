@@ -1,14 +1,22 @@
+from itertools import permutations
+
 def solution(numbers):
-    Num = set()
+    nums = [*numbers]
+    combs = set()
+    for l in range(1,len(nums)+1):
+        for perm in permutations(nums,l):
+            combs.add(int(''.join(perm)))
     
-    def comb(pick,unpick):
-        if(pick!=''):
-            Num.add(int(pick))
-        for i in range(len(unpick)):
-            comb(pick+unpick[i], unpick[:i]+unpick[i+1:])
-            
-    comb('',numbers)
-    Num-={0,1}
-    for i in range(2,int(max(Num)**0.5)+1):
-        Num-=set(range(i*2,max(Num)+1,i))
-    return len(Num)
+    MAX=max(combs)+1
+    Num = [True]*MAX
+    Num[0], Num[1] = False, False
+
+    answer = 0
+    for i in range(2,MAX):
+        for k in range(i*2,MAX,i):
+            Num[k]=False
+
+    for c in combs:
+        if(Num[c]):
+            answer+=1
+    return answer
