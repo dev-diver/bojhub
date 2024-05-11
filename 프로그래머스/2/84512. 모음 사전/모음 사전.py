@@ -1,15 +1,25 @@
-import heapq
+def generate_combinations():
+    sequence = ['A']
+    
+    while True:
+        yield ''.join(sequence) 
+        
+        if len(sequence) < 5:
+            sequence.append('A') 
+        else:
+            for i in range(4, -1, -1):
+                if sequence[i] != 'U':
+                    next_char_index = 'AEIOU'.index(sequence[i]) + 1
+                    sequence[i] = 'AEIOU'[next_char_index]
+                    sequence = sequence[:i+1] 
+                    break
+                if i == 0:
+                    return
+                sequence[i] = 'A'
+
 def solution(word):
-    D=[]
-    def make(str1):
-        if(str1!=''):
-            heapq.heappush(D,str1)
-        if(len(str1)==5): return
-        for c in 'AEIOU':
-            make(str1+c)
-    make('')
-    cnt=1
-    while(D[0]!=word):
-        heapq.heappop(D)
-        cnt+=1
-    return cnt
+    cnt = 1
+    for combo in generate_combinations():
+        if combo == word:
+            return cnt
+        cnt += 1
