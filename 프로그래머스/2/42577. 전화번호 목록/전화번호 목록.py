@@ -1,7 +1,7 @@
-def solution(phone_book):
-    book = set(phone_book)
-    for num in phone_book:
-        for i in range(1,len(num)):
-            if(num[:i] in book):
-                return False
+def solution(phoneBook):
+    phoneBook = sorted(phoneBook)
+
+    for p1, p2 in zip(phoneBook, phoneBook[1:]):
+        if p2.startswith(p1):
+            return False
     return True
