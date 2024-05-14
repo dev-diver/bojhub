@@ -1,6 +1,7 @@
 from collections import Counter
 from functools import reduce
+from operator import mul
 def solution(clothes):
     c = Counter(x[1] for x in clothes)
-    mult = reduce(lambda a,c:a*(c+1),c.values(),1)
-    return mult-1
+    m = reduce(mul,[c[e]+1 for e in c])
+    return m-1
