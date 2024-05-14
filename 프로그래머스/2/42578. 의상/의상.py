@@ -1,6 +1,6 @@
 from collections import Counter
-import math
+from functools import reduce
 def solution(clothes):
     c = Counter(x[1] for x in clothes)
-    product = math.prod(c[p]+1 for p in c)
-    return product-1
+    mult = reduce(lambda a,c:a*(c+1),c.values(),1)
+    return mult-1
